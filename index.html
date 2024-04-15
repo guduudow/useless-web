@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Button Pressing Counter with Jump Scare</title>
+  <style>
+    /* Hide the jumpscare image initially */
+    #jumpScareImage {
+      display: none;
+    }
+  </style>
+  <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="center">
+    <h1>Don't press the button..</h1>
+    <button id="pressButton">Press Me!</button>
+    <p id="warning"></p>
+    <p><span id="counter">0</span></p>
+  </div>
+
+
+  <!-- Hidden jump scare image -->
+  <img id="jumpScareImage" src="img/scarypic.jpeg" alt="Jump Scare Image">
+
+  <!-- Hidden audio element -->
+
+  <script>
+
+    const responses = [
+      "You might want to be careful with that button.",
+      "That button could cause some trouble if you keep pressing it.",
+      "You sure you want to keep pushing that button?",
+      "Just a heads up, that button might not be your friend.",
+      "Watch out, pressing that button could lead to surprises.",
+      "I wouldn't keep pushing that button if I were you.",
+      "That button has some unexpected consequences, be careful.",
+      "Better ease up on that button—it's not as harmless as it looks.",
+      "That button could stir up some problems, heads up!",
+      "Hold off on the button for now, it might not be safe."
+    ];
+
+
+    let audio = new Audio('audio/yeller.mp3');
+    const button = document.getElementById('pressButton');
+    const counterDisplay = document.getElementById('counter');
+    const jumpScareImage = document.getElementById('jumpScareImage');
+    let danger = document.getElementById("warning");
+    let counter = 0;
+
+    const triggerClicks = 50;
+
+    button.addEventListener('click', () => {
+      counter++;
+      counterDisplay.textContent = counter;
+
+      // Trigger the jump scare when counter reaches 100
+      if (counter === 10 || counter === 20 || counter === 30 || counter === 40 || counter === 50 || counter === 60 || counter === 70 || counter === 80 || counter === 90) {
+        // Randomly select one response from the array
+        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+        danger.innerHTML = randomResponse;
+        // Optionally, reset the counter if you want the warning to be displayed again at the next trigger point
+        // Uncomment the following line if you want the warning to be triggered repeatedly
+        // counter = 0;
+      }
+
+      if (counter === 100) {
+        jumpScareImage.style.display = 'block';
+        danger.innerHTML = `What did I tell you?`;
+        audio.play();
+      }
+    });
+  </script>
+</body>
+
+</html>
+
+</html>
