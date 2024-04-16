@@ -52,3 +52,7 @@ button:active {
   box-shadow: 0 5px #444;
   transform: translateY(4px);
 }
+
+#JumpScareImage {
+  width: 100%;
+}
